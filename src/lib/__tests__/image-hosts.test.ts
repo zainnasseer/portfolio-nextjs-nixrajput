@@ -11,6 +11,7 @@ describe("isAllowedImageHost", () => {
   it("accepts GitHub avatars and the site's own origin", () => {
     expect(isAllowedImageHost("https://avatars.githubusercontent.com/u/1")).toBe(true);
     expect(isAllowedImageHost("https://nixrajput.com/images/nikhil.png")).toBe(true);
+    expect(isAllowedImageHost("http://localhost:4000/images/nikhil.png")).toBe(true);
   });
 
   it("rejects a host next/image would refuse to optimise", () => {
@@ -31,7 +32,9 @@ describe("isAllowedImageHost", () => {
     const cfg = (await import("../../../next.config.js")) as unknown as {
       default: { images: { remotePatterns: { hostname: string }[] } };
     };
-    const fromConfig = cfg.default.images.remotePatterns.map((p) => p.hostname).sort();
+    const fromConfig = [
+      ...new Set(cfg.default.images.remotePatterns.map((p) => p.hostname)),
+    ].sort();
     expect([...ALLOWED_IMAGE_HOST_PATTERNS].sort()).toEqual(fromConfig);
   });
 });

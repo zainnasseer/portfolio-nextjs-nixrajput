@@ -1,4 +1,5 @@
 import { cn } from "@/utils/cn";
+import { SITE } from "@/lib/seo/site";
 
 export function Logo({
   className,
@@ -14,7 +15,7 @@ export function Logo({
         height="32"
         viewBox="0 0 32 32"
         role="img"
-        aria-label="Nikhil Rajput logo"
+        aria-label={`${SITE.name} logo`}
         xmlns="http://www.w3.org/2000/svg"
         style={{ display: "block" }}
       >
@@ -44,7 +45,7 @@ export function Logo({
       </svg>
       {withWordmark ? (
         <span className="gradient-text font-mono text-lg leading-none font-semibold tracking-tight">
-          nixrajput
+          {SITE.wordmark}
         </span>
       ) : null}
     </span>

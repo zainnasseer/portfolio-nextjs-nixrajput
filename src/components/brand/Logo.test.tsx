@@ -3,18 +3,18 @@ import { render, screen } from "@testing-library/react";
 import { Logo } from "./Logo";
 
 describe("Logo", () => {
-  it("renders an svg with accessible name matching /nikhil rajput/i", () => {
+  it("renders an svg with accessible name matching /zain nasseer/i", () => {
     render(<Logo />);
-    expect(screen.getByRole("img", { name: /nikhil rajput/i })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /zain nasseer/i })).toBeInTheDocument();
   });
 
-  it("renders wordmark 'nixrajput' when withWordmark is true", () => {
+  it("renders wordmark when withWordmark is true", () => {
     render(<Logo withWordmark />);
-    expect(screen.getByText("nixrajput")).toBeInTheDocument();
+    expect(screen.getByText("zainnasseer")).toBeInTheDocument();
   });
 
   it("does NOT render wordmark by default", () => {
     render(<Logo />);
-    expect(screen.queryByText("nixrajput")).not.toBeInTheDocument();
+    expect(screen.queryByText("zainnasseer")).not.toBeInTheDocument();
   });
 });

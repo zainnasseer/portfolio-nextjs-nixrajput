@@ -72,8 +72,7 @@ export default async function Home() {
   const sponsorUrl = funding.find((f) => f.primary)?.url;
   // Derive contact email from social links (platform = "email") or fall back
   const contactEmail =
-    socials.find((s) => s.platform.toLowerCase() === "email")?.url.replace("mailto:", "") ??
-    "nkr.nikhil.nkr@gmail.com";
+    socials.find((s) => s.platform.toLowerCase() === "email")?.url.replace("mailto:", "") ?? "";
 
   return (
     <>
@@ -118,7 +117,7 @@ export default async function Home() {
 
       {show("contact") && <Contact socials={socials} email={contactEmail} />}
 
-      <Footer socials={socials} />
+      <Footer socials={socials} ownerName={profile.name} />
     </>
   );
 }

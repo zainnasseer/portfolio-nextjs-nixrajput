@@ -11,8 +11,6 @@ import {
   faqs,
   testimonials,
 } from "./schema";
-import { requireEnv } from "@/lib/env";
-
 // Inserted only on a fresh (empty) database. Later content changes are made in the admin
 // panel, not by re-running the seed.
 
@@ -21,11 +19,8 @@ const taglineRows = [
   { text: "Think, build, and ship", active: true, order: 1 },
 ];
 
-// avatarUrl is validated as a full http(s) URL, so seed it as an absolute URL
-// pointing at the bundled asset on whatever site this database serves.
-// NEXT_PUBLIC_SITE_URL is always set (no fallback) — fail loudly if it isn't.
-const SITE_ORIGIN = requireEnv("NEXT_PUBLIC_SITE_URL").replace(/\/$/, "");
-const seededAvatarUrl = `${SITE_ORIGIN}/images/nikhil.png`;
+// Relative path: served from `public/` and avoids Next.js 16 private-IP upstream fetch on localhost.
+const seededAvatarUrl = "/images/nikhil.png";
 
 const profileRow = {
   name: "Nikhil Rajput",

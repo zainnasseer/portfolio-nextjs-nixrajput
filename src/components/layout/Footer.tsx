@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import { platformIcon, type SocialRow } from "@/components/home/Contact";
+import { SITE } from "@/lib/seo/site";
 
-export function Footer({ socials }: { socials: SocialRow[] }) {
+export function Footer({ socials, ownerName }: { socials: SocialRow[]; ownerName?: string }) {
   const sorted = [...socials].sort((a, b) => a.order - b.order);
   const year = new Date().getFullYear();
 
@@ -38,9 +39,12 @@ export function Footer({ socials }: { socials: SocialRow[] }) {
         {/* Row 2: personal sign-off + copyright */}
         <div className="flex flex-col items-center gap-1 text-center">
           <p className="text-foreground/80 text-sm">
-            Designed &amp; built in India <span aria-label="India">🇮🇳</span>
+            Designed &amp; built in {SITE.location}{" "}
+            <span aria-label={SITE.location}>🇮🇶</span>
           </p>
-          <p className="text-muted text-xs">&copy; {year} Nikhil Rajput. All rights reserved.</p>
+          <p className="text-muted text-xs">
+            &copy; {year} {ownerName ?? "Portfolio"}. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

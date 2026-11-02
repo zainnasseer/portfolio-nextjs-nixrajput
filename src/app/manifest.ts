@@ -5,7 +5,7 @@ import { GROUND } from "@/lib/brand";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: SITE.name,
-    short_name: "Nikhil",
+    short_name: "Zain",
     description: SITE.description,
     start_url: "/",
     display: "standalone",

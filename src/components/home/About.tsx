@@ -73,7 +73,7 @@ export function About({ profile }: { profile: AboutProfile }) {
 
           {profile.avatarUrl && (
             <Reveal delay={0.14} className="mx-auto shrink-0 md:mx-0">
-              <AvatarPortrait src={profile.avatarUrl} name={profile.name ?? "Nikhil Rajput"} />
+              <AvatarPortrait src={profile.avatarUrl} name={profile.name ?? "Zain Nasseer"} />
             </Reveal>
           )}
         </div>

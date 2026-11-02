@@ -8,6 +8,7 @@ const ALLOWED_PATTERNS = [
   "**.public.blob.vercel-storage.com",
   "nixrajput.com",
   "**.nixrajput.com",
+  "localhost",
 ] as const;
 
 function hostMatches(hostname: string, pattern: string): boolean {

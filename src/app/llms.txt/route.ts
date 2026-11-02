@@ -11,10 +11,9 @@ export async function GET() {
 
 ## Identity
 
-- Name: Nikhil Rajput (nixrajput)
-- Role: Software Development Engineer & AI Lead
-- Based in: India
-- Founder of: NixLab
+- Name: ${SITE.name} (${SITE.wordmark})
+- Location: ${SITE.location}
+- GitHub: https://github.com/${SITE.wordmark}
 
 ## Links
 

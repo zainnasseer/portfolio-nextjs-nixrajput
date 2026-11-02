@@ -1,3 +1,4 @@
+import { ZAIN } from "@/content/zain-portfolio";
 import { db } from "@/db/client";
 import { projects as projectsTable, type Project } from "@/db/schema";
 import { getCachedRepoData } from "@/lib/github-cache";
@@ -58,7 +59,7 @@ export async function getProjects(): Promise<MergedProject[]> {
   // two GitHub calls plus a cache row each.
   const curation = all.filter((c) => !c.hidden);
 
-  const OWNER = "nixrajput";
+  const OWNER = ZAIN.githubLogin;
   const slugs = curation.map((c) => `${OWNER}/${c.repo}`);
 
   const cacheMap = await getCachedRepoData(slugs);

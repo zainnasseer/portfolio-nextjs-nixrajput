@@ -1,19 +1,17 @@
 import { requirePublicEnv } from "@/lib/env";
 
 export const SITE = {
-  // Canonical production origin (https://nixrajput.com), env-driven with no
-  // hardcoded fallback. Fails the build loudly on the server if missing; on the
-  // client it never throws (would crash hydration) since Next inlines the value.
   url: requirePublicEnv("NEXT_PUBLIC_SITE_URL"),
-  name: "Nikhil Rajput",
-  title: "Nikhil Rajput - Software Engineer & AI Lead",
+  name: "Zain Nasseer",
+  title: "Zain Nasseer · Backend Developer & Communications Engineer",
   description:
-    "Nikhil Rajput is a Software Development Engineer and AI Lead from India who builds fast, reliable web and mobile products across modern front-end and back-end stacks.",
-  handle: "@nixrajput07",
+    "Zainulabdeen Naseer Noori (Zain Nasseer) is a backend developer and Communications Engineer in Baghdad, Iraq—Node.js, NestJS, PostgreSQL, QA for APIs and tvOS streaming, and ESP32 IoT projects.",
+  handle: "@zainnasseer",
+  wordmark: "zainnasseer",
+  location: "Baghdad, Iraq",
   sameAs: [
-    "https://github.com/nixrajput",
-    "https://www.linkedin.com/in/nixrajput",
-    "https://twitter.com/nixrajput07",
-    "https://www.instagram.com/nixrajput",
+    "https://github.com/zainnasseer",
+    "https://www.linkedin.com/in/zain-naseer-166a36345",
+    "mailto:zainnaser18@gmail.com",
   ],
 } as const;

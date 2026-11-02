@@ -16,13 +16,14 @@ import { getProjects } from "@/lib/projects";
 import type { MergedProject } from "@/lib/projects";
 import { getCachedUserStats } from "@/lib/github-cache";
 import { professionalYears } from "@/lib/experience";
+import { normalizePublicAssetUrl } from "@/lib/public-asset-url";
 
 // Bundled asset shown when the profile has no avatar set yet (e.g. before the
 // admin uploads one). Served from `public/`, so a relative src is correct here.
-const FALLBACK_AVATAR = "/images/nikhil.png";
+const FALLBACK_AVATAR = "https://avatars.githubusercontent.com/u/196541309?v=4";
 
 // GitHub account backing the live stats (same owner as the curated repos).
-const GITHUB_USERNAME = "nixrajput";
+const GITHUB_USERNAME = "zainnasseer";
 
 // ── Public row types ────────────────────────────────────────────────────────
 
@@ -84,7 +85,7 @@ export async function getProfile(): Promise<{
   return {
     name: row.name,
     bio: row.bio,
-    avatarUrl: (row.avatarUrl as string) || FALLBACK_AVATAR,
+    avatarUrl: normalizePublicAssetUrl((row.avatarUrl as string) || FALLBACK_AVATAR),
     resumeUrl: (row.resumeUrl as string) ?? "",
     heroTagline: row.heroTagline ?? null,
     sectionVisibility: (row.sectionVisibility as Record<string, boolean>) ?? {},

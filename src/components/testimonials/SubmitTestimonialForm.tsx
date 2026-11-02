@@ -253,7 +253,7 @@ export function SubmitTestimonialForm({
           minLength={20}
           maxLength={1000}
           rows={5}
-          placeholder="Share what it's like to know or work with Nikhil…"
+          placeholder="Share what it's like to know or work together…"
           aria-invalid={Boolean(fieldErrors.content)}
           aria-describedby={fieldErrors.content ? "err-content" : undefined}
           onChange={() => clearFieldError("content")}

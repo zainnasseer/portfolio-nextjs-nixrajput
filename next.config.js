@@ -4,11 +4,15 @@
 // disables the redirect rather than crashing config evaluation.
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 let apexHost = null;
+let siteHostname = null;
 if (siteUrl) {
   try {
-    apexHost = new URL(siteUrl).host.replace(/^www\./, "");
+    const parsed = new URL(siteUrl);
+    apexHost = parsed.host.replace(/^www\./, "");
+    siteHostname = parsed.hostname;
   } catch {
     apexHost = null;
+    siteHostname = null;
   }
 }
 
@@ -48,6 +52,15 @@ const nextConfig = {
       // at a bundled /public asset on this origin.
       { protocol: "https", hostname: "nixrajput.com" },
       { protocol: "https", hostname: "**.nixrajput.com" },
+      // Local dev: seed stores avatarUrl as `${NEXT_PUBLIC_SITE_URL}/images/...`.
+      { protocol: "http", hostname: "localhost" },
+      { protocol: "https", hostname: "localhost" },
+      ...(siteHostname && siteHostname !== "localhost"
+        ? [
+            { protocol: "https", hostname: siteHostname },
+            { protocol: "http", hostname: siteHostname },
+          ]
+        : []),
     ],
   },
 };

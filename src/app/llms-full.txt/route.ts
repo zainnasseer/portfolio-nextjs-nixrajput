@@ -33,7 +33,7 @@ export async function GET() {
 
   const projectLines = projects
     .map((p) => {
-      const url = p.htmlUrl ?? `https://github.com/nixrajput/${p.repo}`;
+      const url = p.htmlUrl ?? `https://github.com/${SITE.wordmark}/${p.repo}`;
       const stats = p.stars === null ? "" : ` (${pluralize(p.stars, "GitHub star")})`;
       const tags = p.tags.length ? ` Tags: ${p.tags.join(", ")}.` : "";
       return `- **${p.title}**${p.featured ? " (featured)" : ""} - ${p.description ?? ""}${stats} - ${url}.${tags}`;
@@ -57,10 +57,10 @@ export async function GET() {
 ## Identity
 
 - **Name:** ${profile.name}
-- **Handle:** nixrajput
+- **Handle:** ${SITE.wordmark}
+- **Location:** ${SITE.location}
 - **Role:** ${profile.roles.join(" · ")}
-${current ? `- **Currently:** ${current.role} at ${current.org} (${current.period})\n` : ""}- **Based in:** India
-- **Founder of:** NixLab - a personal software studio for open-source tools and products
+${current ? `- **Currently:** ${current.role} at ${current.org} (${current.period})\n` : ""}
 
 ## Bio
 
@@ -75,16 +75,11 @@ ${profile.bio}
 
 ${section("Tech Stack", groupSkills(skills))}${section("Projects", projectLines)}${section("Experience", experienceLines)}## Open-Source
 
-GitHub: https://github.com/nixrajput
+GitHub: https://github.com/${SITE.wordmark}
 
 ## Availability
 
-Nikhil is open to:
-- Open-source collaboration
-- Freelance engagements
-- Advisory roles
-
-He is not actively job-seeking but welcomes conversations about interesting projects.
+${profile.name.split(" ")[0]} is open to open-source collaboration, freelance work, and interesting product conversations.
 
 ${section("FAQ", faqLines)}## Contact
 
