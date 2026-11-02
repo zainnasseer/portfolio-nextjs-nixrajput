@@ -1,3 +1,5 @@
+const path = require("path");
+
 // Canonical origin from the same env var the app uses (NEXT_PUBLIC_SITE_URL),
 // so the www->apex redirect tracks one source of truth with the canonical tags,
 // sitemap, robots, and JSON-LD. Parsed defensively: a missing/invalid value
@@ -19,6 +21,10 @@ if (siteUrl) {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Home-dir lockfiles (e.g. ~/package-lock.json) must not become the Turbopack root.
+  turbopack: {
+    root: path.join(__dirname),
+  },
   // sharp is a native addon used server-side (testimonial/avatar image
   // optimization in src/lib/blob.ts). Mark it external so Next loads it via a
   // plain require from node_modules at runtime instead of letting Turbopack

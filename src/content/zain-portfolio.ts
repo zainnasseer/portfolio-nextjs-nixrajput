@@ -1,10 +1,10 @@
 /**
- * Portfolio content from Zainulabdeen_Noori_CV.pdf + confirmed QA details.
+ * Portfolio content from CV, LinkedIn, and developer identity notes.
  */
 export const ZAIN = {
   githubLogin: "zainnasseer",
   githubUserId: 196541309,
-  displayName: "Zain Nasseer",
+  displayName: "Zain Naseer",
   legalName: "Zainulabdeen Naseer Noori",
   location: "Baghdad, Iraq",
   nationality: "Iraqi",
@@ -12,58 +12,62 @@ export const ZAIN = {
   email: "zainnaser18@gmail.com",
   handle: "zainnasseer",
   resumeUrl: "/Zainulabdeen_Noori_CV.pdf",
-  heroTagline: "Backend developer · communications engineer · QA for streaming & APIs",
+  /** Fallback About stats when GitHub cache/API is cold (updated from public GitHub profile). */
+  profileStats: { years: 2, repos: 6, stars: 2, followers: 0 },
+  heroTagline: "Backend APIs · QA on mobile & tvOS · embedded networking",
   roles: [
     "Backend Developer",
-    "Communications Engineer",
     "Quality Assurance Analyst",
+    "Communications Engineer",
   ],
-  bio: `Zainulabdeen Naseer Noori (Zain Nasseer) is a Communications Engineer and backend developer in Baghdad, Iraq, building reliable services with Node.js, Express.js, NestJS, Bun, and PostgreSQL. He combines a wireless systems, networking, and IoT engineering background with hands-on API design, JWT auth, and payment integrations.
+  bio: `Zainulabdeen Naseer Noori (Zain Nasseer) is a Communications Engineer and backend developer in Baghdad, Iraq. He builds fast, scalable APIs with Node.js, TypeScript, Bun, and Express.js, and designs relational data layers with PostgreSQL, SQLite, and Drizzle ORM. He is equally comfortable in QA—manual API testing with Postman, e-commerce flow validation, and multi-platform UI testing on mobile and tvOS.
 
-He also works as a Quality Assurance Analyst—microservices and e-commerce testing with Postman, mobile UI regression, defect tracking in Trello, and tvOS QA for a video streaming app (timeline scrubbing, RTL localization, search filtering).
+Languages: native Arabic, fluent English (spoken and written).
 
-Zain earned a B.Sc. in Communications Engineering from the University of Information Technology and Communications (UoITC), specializing in Mobile Communications and Computing Engineering. He completed summer training at Zain Iraq HQ (top 10 pitched projects) and ships personal projects on GitHub as zainnasseer. Languages: Arabic (native) and English (fluent).`,
+Developer workflow: terminal-first with Homebrew, Postman CLI, jq, pgcli, and Antigravity IDE, plus multi-remote Git synchronization.
+
+Zain earned a B.Sc. in Communications Engineering from UoITC (Mobile Communications and Computing Engineering), trained at Zain Iraq HQ (top 10 pitched projects), and practices advanced SQL tuning in Dockerized PostgreSQL with DBeaver, psql, and pgcli.`,
   avatarUrl: "https://avatars.githubusercontent.com/u/196541309?v=4",
   taglines: [
-    { text: "Reliable APIs. Solid engineering.", active: true, order: 0 },
-    { text: "Node · Nest · Postgres · QA", active: true, order: 1 },
+    { text: "Terminal-first. API-driven.", active: true, order: 0 },
+    { text: "Postgres · Bun · Postman · tvOS QA", active: true, order: 1 },
   ],
   projects: [
     {
       repo: "bun-js-mini-payment-gateway",
-      title: "Custom Payment Gateway",
-      tags: ["Bun", "PostgreSQL", "Drizzle", "Jest"],
+      title: "Mini Payment Gateway",
+      tags: ["Bun", "Drizzle", "PostgreSQL", "Jest"],
       featured: true,
       order: 0,
       customBlurb:
-        "Bun/Node payment service with Drizzle ORM and PostgreSQL—idempotency keys, ACID transaction blocks, and a finite state machine for checkout flows.",
+        "Architected a financial backend on Bun and Node.js with Drizzle ORM and PostgreSQL—idempotency keys, ACID transaction blocks, and finite state machines, with Jest coverage for critical paths.",
+    },
+    {
+      repo: "esp32-c5-devkit-wifi-repeater",
+      title: "ESP32 Wi-Fi Repeater",
+      tags: ["ESP32-C5", "ESP-IDF", "lwIP", "802.11"],
+      featured: true,
+      order: 1,
+      customBlurb:
+        "Senior thesis: hardware Wi-Fi repeater on ESP32-C5—AP + STA mode with NAT support, embedded networking via ESP-IDF and lwIP, aligned with IEEE 802.11 fundamentals.",
     },
     {
       repo: "e-com",
       title: "E-commerce REST API",
       tags: ["Express.js", "MongoDB", "JWT", "Stripe"],
       featured: true,
-      order: 1,
+      order: 2,
       customBlurb:
         "Modular Express REST API with MongoDB, bcrypt + JWT auth, role-based access, Stripe payments, SMTP/OTP login, and hardening against common web attacks.",
     },
     {
       repo: "nest-js-practice",
       title: "NestJS REST API",
-      tags: ["NestJS", "PostgreSQL", "TypeORM", "JWT"],
-      featured: true,
-      order: 2,
-      customBlurb:
-        "Layered NestJS API (controllers, services, modules, interceptors) with PostgreSQL via TypeORM—migrations, seeding, bcrypt, and JWT sessions.",
-    },
-    {
-      repo: "esp32-c5-devkit-wifi-repeater",
-      title: "ESP32-C5 Wi-Fi Repeater",
-      tags: ["ESP32-C5", "Embedded C", "NAPT"],
+      tags: ["NestJS", "PostgreSQL", "TypeORM", "Docker"],
       featured: true,
       order: 3,
       customBlurb:
-        "Senior-year project: dual-band Wi-Fi range extender on ESP32-C5—low-level Wi-Fi APIs, NAT/NAPT routing, embedded firmware, and a management dashboard.",
+        "Layered NestJS API with PostgreSQL via TypeORM—migrations, seeding, bcrypt, JWT sessions, and Dockerized Postgres for local schema work.",
     },
     {
       repo: "codecrafters-shell-typescript",
@@ -86,33 +90,33 @@ Zain earned a B.Sc. in Communications Engineering from the University of Informa
     {
       role: "Quality Assurance Analyst",
       org: "Microservices & E-commerce",
-      period: "Present",
+      period: "2024 – Present",
       location: "Baghdad, Iraq · Remote",
       isCurrent: true,
       description: [
-        "Manual API testing with Postman across microservice and e-commerce flows.",
-        "Mobile application UI testing and structured regression.",
-        "Defect management and triage in Trello with reproducible steps.",
+        "Manual API testing with Postman across microservice boundaries and e-commerce checkout flows.",
+        "Mobile application UI testing and structured regression on consumer releases.",
+        "Defect management in Trello with reproducible steps for engineering triage.",
       ],
       order: 0,
     },
     {
-      role: "QA Engineer · tvOS Streaming",
-      org: "Apple TV Video Application",
-      period: "Recent",
+      role: "QA Engineer · Apple TV Streaming",
+      org: "tvOS Video Application",
+      period: "2024",
       location: "Remote",
       isCurrent: false,
       description: [
-        "Validated timeline scrubbing, playback edge cases, and player UX on tvOS.",
-        "Tested RTL localization and layout for right-to-left locales.",
-        "Verified search and catalog filtering behavior.",
+        "Rigorous UI and functional testing on tvOS for a video streaming product.",
+        "Filed and tracked defects for timeline scrubbing, RTL localization, search filtering, and subtitle setting persistence.",
+        "Validated playback edge cases and player UX across localized builds.",
       ],
       order: 1,
     },
     {
       role: "Summer Training",
       org: "Zain Iraq HQ",
-      period: "Summer program",
+      period: "2023",
       location: "Baghdad, Iraq",
       isCurrent: false,
       description: [
@@ -124,12 +128,12 @@ Zain earned a B.Sc. in Communications Engineering from the University of Informa
     {
       role: "B.Sc. · Communications Engineering",
       org: "University of Information Technology and Communications (UoITC)",
-      period: "Graduated",
+      period: "2023",
       location: "Baghdad, Iraq",
       isCurrent: false,
       description: [
         "Specialization: Mobile Communications and Computing Engineering.",
-        "Coursework: wireless and optical communications, IoT networking, mobile systems, cryptography, DSP, and soft computing.",
+        "Senior thesis: ESP32-C5 Wi-Fi repeater (AP + STA, NAT/NAPT).",
         "University project: Flutter weather app using OpenWeather API.",
       ],
       order: 3,
@@ -140,56 +144,50 @@ Zain earned a B.Sc. in Communications Engineering from the University of Informa
       category: "Backend Development",
       items: [
         { name: "Node.js", level: "Intermediate", iconPath: "/skills/nodejs.svg" },
+        { name: "TypeScript", level: "Intermediate", iconPath: "/skills/typescript.svg" },
+        { name: "Bun", level: "Intermediate", iconPath: "/skills/bun.svg" },
         { name: "Express.js", level: "Intermediate", iconPath: "/skills/express.svg" },
-        { name: "NestJS", level: "Intermediate", iconPath: "/skills/express.svg" },
-        { name: "Bun", level: "Intermediate", iconPath: "/skills/nodejs.svg" },
-        { name: "REST APIs", level: "Intermediate", iconPath: "/skills/nodejs.svg" },
-        { name: "JWT / bcrypt", level: "Intermediate", iconPath: "/skills/nodejs.svg" },
+        { name: "NestJS", level: "Intermediate", iconPath: "/skills/nestjs.svg" },
+        { name: "REST APIs", level: "Intermediate", iconPath: "/skills/openapi.svg" },
       ],
     },
     {
       category: "Database Management",
       items: [
         { name: "PostgreSQL", level: "Intermediate", iconPath: "/skills/postgresql.svg" },
-        { name: "MySQL", level: "Intermediate", iconPath: "/skills/mysql.svg" },
+        { name: "SQLite", level: "Intermediate", iconPath: "/skills/sqlite.svg" },
+        { name: "Drizzle ORM", level: "Intermediate", iconPath: "/skills/drizzle.svg" },
+        { name: "SQL Optimization", level: "Intermediate", iconPath: "/skills/postgresql.svg" },
         { name: "MongoDB", level: "Intermediate", iconPath: "/skills/mongodb.svg" },
-        { name: "Drizzle ORM", level: "Intermediate", iconPath: "/skills/postgresql.svg" },
-      ],
-    },
-    {
-      category: "Programming Languages",
-      items: [
-        { name: "TypeScript", level: "Intermediate", iconPath: "/skills/typescript.svg" },
-        { name: "JavaScript", level: "Intermediate", iconPath: "/skills/javascript.svg" },
-        { name: "Dart / Flutter", level: "Intermediate", iconPath: "/skills/flutter.svg" },
-        { name: "Python", level: "Beginner", iconPath: "/skills/ubuntu.png" },
-        { name: "C / C++", level: "Intermediate", iconPath: "/skills/ubuntu.png" },
       ],
     },
     {
       category: "Quality Assurance",
       items: [
-        { name: "Postman", level: "Expert", iconPath: "/images/analytical-skills.png" },
-        { name: "Swagger", level: "Intermediate", iconPath: "/images/logical-thinking.png" },
-        { name: "API Testing", level: "Expert", iconPath: "/images/logical-thinking.png" },
-        { name: "Mobile UI Testing", level: "Expert", iconPath: "/images/collaboration.png" },
+        { name: "Postman", level: "Expert", iconPath: "/skills/postman.svg" },
+        { name: "API Testing", level: "Expert", iconPath: "/skills/postman.svg" },
+        { name: "E-commerce QA", level: "Expert", iconPath: "/skills/shopify.svg" },
+        { name: "Mobile UI Testing", level: "Expert", iconPath: "/skills/flutter.svg" },
+        { name: "tvOS QA", level: "Expert", iconPath: "/skills/apple.svg" },
       ],
     },
     {
-      category: "Tools & Workflow",
+      category: "CLI & Workflow",
       items: [
-        { name: "Git", level: "Intermediate", iconPath: "/skills/git.svg" },
-        { name: "GitHub", level: "Intermediate", iconPath: "/skills/github.svg" },
+        { name: "Homebrew", level: "Expert", iconPath: "/skills/homebrew.svg" },
+        { name: "Postman CLI", level: "Intermediate", iconPath: "/skills/postman.svg" },
+        { name: "jq", level: "Intermediate", iconPath: "/skills/jq.svg" },
+        { name: "pgcli / psql", level: "Intermediate", iconPath: "/skills/postgresql.svg" },
+        { name: "Git (multi-remote)", level: "Intermediate", iconPath: "/skills/git.svg" },
         { name: "Docker", level: "Intermediate", iconPath: "/skills/docker.png" },
-        { name: "VS Code", level: "Expert", iconPath: "/skills/ubuntu.png" },
       ],
     },
     {
       category: "Embedded & Networking",
       items: [
-        { name: "ESP32-C5", level: "Intermediate", iconPath: "/skills/ubuntu.png" },
-        { name: "IoT / Networking", level: "Intermediate", iconPath: "/skills/ubuntu.png" },
-        { name: "MATLAB / Simulation", level: "Intermediate", iconPath: "/skills/ubuntu.png" },
+        { name: "ESP32-C5", level: "Intermediate", iconPath: "/skills/espressif.svg" },
+        { name: "ESP-IDF / lwIP", level: "Intermediate", iconPath: "/skills/espressif.svg" },
+        { name: "IEEE 802.11", level: "Intermediate", iconPath: "/skills/wifi.svg" },
       ],
     },
     {
@@ -197,29 +195,30 @@ Zain earned a B.Sc. in Communications Engineering from the University of Informa
       items: [
         { name: "Next.js", level: "Intermediate", iconPath: "/skills/nextjs.png" },
         { name: "React.js", level: "Intermediate", iconPath: "/skills/react.svg" },
+        { name: "Flutter", level: "Intermediate", iconPath: "/skills/flutter.svg" },
       ],
     },
   ],
   services: [
     {
-      title: "Backend Development",
-      shortDescription: "Node, NestJS, Express, and Postgres-backed APIs.",
+      title: "Backend Engineering",
+      shortDescription: "Fast, scalable APIs with Node.js, TypeScript, Bun, and Express.",
       description:
-        "REST APIs with layered architecture, JWT authentication, ORM migrations, payment hooks, and production-minded error handling—matching the stack in my e-commerce and NestJS projects.",
+        "Design and implement RESTful services with clear layering, auth, and data access—using Node.js, TypeScript, Bun, and Express.js for backends that stay maintainable under real traffic.",
       order: 0,
     },
     {
-      title: "Quality Assurance",
-      shortDescription: "API, mobile, and tvOS streaming validation.",
+      title: "Quality Assurance & Testing",
+      shortDescription: "Postman APIs, e-commerce flows, mobile & tvOS UI.",
       description:
-        "Postman-driven API testing, mobile UI regression, tvOS scenarios (scrubbing, RTL, search), and Trello-based defect workflows for microservices and e-commerce teams.",
+        "Manual API testing with Postman, end-to-end e-commerce validation, and multi-platform UI testing on mobile and tvOS—including scrubbing, RTL, search, and subtitle persistence on streaming clients.",
       order: 1,
     },
     {
-      title: "Embedded & IoT",
-      shortDescription: "ESP32 networking and repeater firmware.",
+      title: "Database Management",
+      shortDescription: "Schema design and performance with PostgreSQL & Drizzle.",
       description:
-        "Wi-Fi repeater and NAT/NAPT designs on ESP32-C5—bridging communications engineering coursework with shipped firmware prototypes.",
+        "Relational schema design, migrations, and query tuning on PostgreSQL and SQLite with Drizzle ORM—often in Dockerized dev environments using DBeaver, psql, and pgcli.",
       order: 2,
     },
   ],
@@ -253,31 +252,31 @@ Zain earned a B.Sc. in Communications Engineering from the University of Informa
     {
       question: "Who is Zain Nasseer?",
       answer:
-        "Zainulabdeen Naseer Noori (Zain Nasseer) is an Iraqi Communications Engineer and backend developer in Baghdad, with QA experience across APIs, mobile, and tvOS streaming. B.Sc. from UoITC (Mobile Communications and Computing Engineering).",
+        "Zainulabdeen Naseer Noori (Zain Nasseer) is an Iraqi backend developer and QA analyst in Baghdad—native Arabic, fluent English—with a Communications Engineering degree from UoITC and work across APIs, tvOS streaming QA, and embedded Wi-Fi projects.",
       order: 0,
     },
     {
-      question: "What is Zain's professional background?",
+      question: "What does Zain specialize in?",
       answer:
-        "Backend-focused builder (Node.js, Express, NestJS, PostgreSQL) plus QA work on microservices, e-commerce, and Apple TV streaming. Summer training at Zain Iraq HQ with a top-10 project pitch.",
+        "Backend engineering (Node.js, TypeScript, Bun, Express), quality assurance (Postman, e-commerce, mobile and tvOS UI), and database management (PostgreSQL, SQLite, Drizzle, SQL performance tuning).",
       order: 1,
     },
     {
-      question: "What is Zain's tech stack?",
+      question: "What is Zain's developer workflow?",
       answer:
-        "Backend: Node.js, Bun, NestJS, Express, REST, JWT, Drizzle/TypeORM. Data: PostgreSQL, MySQL, MongoDB. Tools: Postman, Swagger, Docker, Git. Embedded: ESP32-C5, IoT networking. Also Flutter/Dart and Next.js for apps and this portfolio.",
+        "Terminal-first tooling: Homebrew, Postman CLI, jq, pgcli, Antigravity IDE, and multi-remote Git sync—alongside Dockerized Postgres for schema and SQL tuning work.",
       order: 2,
     },
     {
       question: "What projects should I look at?",
       answer:
-        "E-commerce Express/Mongo API, NestJS/PostgreSQL API, Bun payment gateway with idempotency, ESP32-C5 Wi-Fi repeater thesis, Codecrafters shell, and this Next.js portfolio—all on GitHub (zainnasseer).",
+        "Mini payment gateway (Bun, idempotency, ACID, FSM, Jest), ESP32-C5 Wi-Fi repeater thesis, e-commerce Express API, NestJS/PostgreSQL API, Codecrafters shell, and this Next.js portfolio on GitHub (zainnasseer).",
       order: 3,
     },
     {
       question: "How can I contact Zain?",
       answer:
-        "Email zainnaser18@gmail.com, connect on LinkedIn (zain-naseer), call +964 771 903 5744, or reach out on GitHub. Download the CV from the resume link on this site.",
+        "Email zainnaser18@gmail.com, LinkedIn (zain-naseer), phone +964 771 903 5744, or GitHub. CV available via the resume link on this site.",
       order: 4,
     },
   ],

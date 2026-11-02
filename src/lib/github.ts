@@ -41,27 +41,65 @@ const USER_STATS_QUERY = `query($login:String!){
   }
 }`;
 
-/** Fetch account-level stats via the GraphQL API. Returns null if the user is
- *  absent. Throws on transport/schema errors so the caller can fall back. */
-export async function getUserStats(username: string): Promise<GithubUserStats | null> {
-  const res = await fetch(GITHUB_GRAPHQL, {
-    method: "POST",
-    headers: { ...authHeaders(), "Content-Type": "application/json" },
-    body: JSON.stringify({ query: USER_STATS_QUERY, variables: { login: username } }),
+type GithubUserJson = {
+  followers?: number;
+  public_repos?: number;
+};
+
+/** Public REST fallback when GraphQL is unavailable (no token → 401). */
+async function getUserStatsFromRest(username: string): Promise<GithubUserStats | null> {
+  const userRes = await fetch(`${GITHUB_API}/users/${username}`, {
+    headers: authHeaders(),
     next: { revalidate: REVALIDATE_SECONDS, tags: ["github"] },
   });
-  if (!res.ok) throw new Error(`GitHub getUserStats ${username} failed: ${res.status}`);
-  const parsed = githubUserStatsSchema.parse(await res.json());
-  const user = parsed.data.user;
-  if (!user) return null;
+  if (!userRes.ok) return null;
+  const user = (await userRes.json()) as GithubUserJson;
+  if (typeof user.followers !== "number") return null;
 
-  const years = user.contributionsCollection.contributionYears;
+  let repos: GithubRepo[] = [];
+  try {
+    repos = await listUserRepos(username);
+  } catch {
+    repos = [];
+  }
+  const owned = repos.filter((r) => !r.fork);
   return {
-    followers: user.followers.totalCount,
-    publicRepos: user.repositories.totalCount,
-    totalStars: user.repositories.nodes.reduce((sum, r) => sum + r.stargazerCount, 0),
-    firstContributionYear: years.length > 0 ? Math.min(...years) : null,
+    followers: user.followers,
+    publicRepos: user.public_repos ?? owned.length,
+    totalStars: owned.reduce((sum, r) => sum + r.stargazers_count, 0),
+    firstContributionYear: null,
   };
+}
+
+/** Account-level stats: GraphQL when a token is present, otherwise REST. */
+export async function getUserStats(username: string): Promise<GithubUserStats | null> {
+  if (process.env.GITHUB_TOKEN) {
+    try {
+      const res = await fetch(GITHUB_GRAPHQL, {
+        method: "POST",
+        headers: { ...authHeaders(), "Content-Type": "application/json" },
+        body: JSON.stringify({ query: USER_STATS_QUERY, variables: { login: username } }),
+        next: { revalidate: REVALIDATE_SECONDS, tags: ["github"] },
+      });
+      if (res.ok) {
+        const parsed = githubUserStatsSchema.parse(await res.json());
+        const user = parsed.data.user;
+        if (!user) return null;
+
+        const years = user.contributionsCollection.contributionYears;
+        return {
+          followers: user.followers.totalCount,
+          publicRepos: user.repositories.totalCount,
+          totalStars: user.repositories.nodes.reduce((sum, r) => sum + r.stargazerCount, 0),
+          firstContributionYear: years.length > 0 ? Math.min(...years) : null,
+        };
+      }
+    } catch {
+      /* fall through to REST */
+    }
+  }
+
+  return getUserStatsFromRest(username);
 }
 
 /** Fetch a single repo by "owner/name". Returns null on 404. Throws on bad schema. */

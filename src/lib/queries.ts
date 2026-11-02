@@ -71,10 +71,9 @@ export async function getProfile(): Promise<{
   // Served from the last-known-good cache row so they never flash blank, falling back to the
   // seeded stats only on a cold cache with a failed first fetch.
   const userStats = await getCachedUserStats(GITHUB_USERNAME);
-  const followers = userStats ? userStats.followers : Number(s.followers ?? 0);
-  const repos =
-    userStats && userStats.publicRepos > 0 ? userStats.publicRepos : Number(s.repos ?? 0);
-  const stars = userStats && userStats.totalStars > 0 ? userStats.totalStars : Number(s.stars ?? 0);
+  const followers = userStats?.followers ?? Number(s.followers ?? 0);
+  const repos = userStats?.publicRepos ?? Number(s.repos ?? 0);
+  const stars = userStats?.totalStars ?? Number(s.stars ?? 0);
 
   // Years is NOT GitHub-derived: it is professional experience, taken from the experience
   // rows. GitHub's first-contribution year answers a different question (how long the

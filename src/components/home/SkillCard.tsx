@@ -4,12 +4,15 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { cn } from "@/utils/cn";
 
-// Icons that are white/monochrome glyphs — invisible on the light-theme
-// surface. Invert them in light mode so they read as dark.
-const INVERT_IN_LIGHT = /nextjs|next-js|next\.|vercel|express|flask|github|apple/i;
+// Light glyphs (e.g. Next.js wordmark) need inversion on light surfaces only.
+const INVERT_IN_LIGHT = /nextjs|next-js|next\.|vercel|flask|github/i;
+// Black brand marks need inversion on dark surfaces only.
+const INVERT_IN_DARK = /apple|drizzle/i;
 
 export function SkillCard({ name, iconPath }: { name: string; iconPath: string }) {
   const invertLight = INVERT_IN_LIGHT.test(iconPath) || INVERT_IN_LIGHT.test(name);
+  const invertDark = INVERT_IN_DARK.test(iconPath);
+  const isBun = /\/bun\.svg$/i.test(iconPath);
   return (
     <motion.li
       whileHover={{ y: -4, scale: 1.03 }}
@@ -20,6 +23,7 @@ export function SkillCard({ name, iconPath }: { name: string; iconPath: string }
         <Image
           src={iconPath}
           alt=""
+          aria-hidden
           fill
           sizes="48px"
           // unoptimized: icons are tiny (no optimizer gain) and this serves
@@ -27,9 +31,10 @@ export function SkillCard({ name, iconPath }: { name: string; iconPath: string }
           // without the next/image SVG restriction.
           unoptimized
           className={cn(
-            "object-contain p-1",
-            // Light theme: invert white glyphs to dark; dark theme leaves them.
+            "object-contain",
+            isBun ? "p-0.5" : "p-1.5",
             invertLight && "invert dark:invert-0",
+            invertDark && "dark:invert",
           )}
           onError={() => {}}
         />

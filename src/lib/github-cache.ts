@@ -5,7 +5,11 @@ import type { GithubCache, GithubUserCache } from "@/db/schema";
 import { getReadme, getRepo, getUserStats } from "@/lib/github";
 import { toExcerpt } from "@/lib/readme";
 
-const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+// Dev: longer TTL so each refresh does not fan out to GitHub + Neon (6–12 API calls per page).
+const CACHE_TTL_MS =
+  process.env.NODE_ENV === "development"
+    ? 7 * 24 * 60 * 60 * 1000
+    : 24 * 60 * 60 * 1000;
 
 export type CachedRepoStats = {
   stars: number;

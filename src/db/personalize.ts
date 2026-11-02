@@ -12,6 +12,7 @@ import {
   faqs,
   testimonials,
   githubCache,
+  githubUserCache,
 } from "./schema";
 import { ZAIN } from "@/content/zain-portfolio";
 
@@ -74,11 +75,32 @@ async function personalize() {
         heroTagline: ZAIN.heroTagline,
         avatarUrl: ZAIN.avatarUrl,
         resumeUrl: "resumeUrl" in ZAIN ? (ZAIN.resumeUrl ?? null) : null,
-        stats: { years: 1, repos: 6, stars: 0, followers: 0 },
+        stats: { ...ZAIN.profileStats },
         sectionVisibility: { ...ZAIN.sectionVisibility },
         updatedAt: new Date(),
       })
       .where(eq(profile.id, row.id));
+
+    const ps = ZAIN.profileStats;
+    await tx
+      .insert(githubUserCache)
+      .values({
+        username: ZAIN.githubLogin,
+        followers: ps.followers,
+        publicRepos: ps.repos,
+        totalStars: ps.stars,
+        firstContributionYear: null,
+        fetchedAt: new Date(),
+      })
+      .onConflictDoUpdate({
+        target: githubUserCache.username,
+        set: {
+          followers: ps.followers,
+          publicRepos: ps.repos,
+          totalStars: ps.stars,
+          fetchedAt: new Date(),
+        },
+      });
   });
 
   console.log("Personalization complete.");

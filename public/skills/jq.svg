@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-label="jq">
+  <rect width="24" height="24" rx="5" fill="#52B038"/>
+  <text
+    x="12"
+    y="15.5"
+    text-anchor="middle"
+    font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+    font-size="8"
+    font-weight="700"
+    fill="#ffffff"
+  >
+    jq
+  </text>
+</svg>

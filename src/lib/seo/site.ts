@@ -5,7 +5,7 @@ export const SITE = {
   name: "Zain Nasseer",
   title: "Zain Nasseer · Backend Developer & Communications Engineer",
   description:
-    "Zainulabdeen Naseer Noori (Zain Nasseer) is a backend developer and Communications Engineer in Baghdad, Iraq—Node.js, NestJS, PostgreSQL, QA for APIs and tvOS streaming, and ESP32 IoT projects.",
+    "Zain Nasseer—backend engineer (Node.js, TypeScript, Bun, Express), QA for APIs, e-commerce, and tvOS streaming, and PostgreSQL/Drizzle database work. Baghdad, Iraq. Native Arabic, fluent English.",
   handle: "@zainnasseer",
   wordmark: "zainnasseer",
   location: "Baghdad, Iraq",

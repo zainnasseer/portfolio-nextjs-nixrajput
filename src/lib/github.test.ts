@@ -72,6 +72,7 @@ describe("getUserStats", () => {
   };
 
   it("sums stars and picks the earliest contribution year", async () => {
+    vi.stubEnv("GITHUB_TOKEN", "test-token");
     vi.stubGlobal(
       "fetch",
       vi.fn(async () => new Response(JSON.stringify(statsResponse), { status: 200 })),
@@ -86,6 +87,7 @@ describe("getUserStats", () => {
   });
 
   it("returns null when the user is absent", async () => {
+    vi.stubEnv("GITHUB_TOKEN", "test-token");
     vi.stubGlobal(
       "fetch",
       vi.fn(async () => new Response(JSON.stringify({ data: { user: null } }), { status: 200 })),
@@ -93,11 +95,30 @@ describe("getUserStats", () => {
     expect(await getUserStats("ghost")).toBeNull();
   });
 
-  it("throws on a non-ok response so the caller can fall back", async () => {
+  it("falls back to REST when GraphQL fails without a token", async () => {
+    vi.stubEnv("GITHUB_TOKEN", "");
     vi.stubGlobal(
       "fetch",
-      vi.fn(async () => new Response("nope", { status: 401 })),
+      vi.fn(async (input: RequestInfo | URL) => {
+        const url = String(input);
+        if (url.includes("/graphql")) {
+          return new Response("nope", { status: 401 });
+        }
+        if (url.endsWith("/users/nixrajput")) {
+          return new Response(JSON.stringify({ followers: 5, public_repos: 2 }), { status: 200 });
+        }
+        if (url.includes("/users/nixrajput/repos")) {
+          return new Response(JSON.stringify([{ ...repoFixture, fork: false }]), { status: 200 });
+        }
+        throw new Error(`unexpected fetch: ${url}`);
+      }),
     );
-    await expect(getUserStats("nixrajput")).rejects.toThrow();
+    const stats = await getUserStats("nixrajput");
+    expect(stats).toEqual({
+      followers: 5,
+      publicRepos: 2,
+      totalStars: 42,
+      firstContributionYear: null,
+    });
   });
 });
