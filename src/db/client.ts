@@ -4,7 +4,13 @@ import * as schema from "./schema";
 
 // `prepare: false` is required: under pgbouncer transaction pooling a connection is reused
 // across statements, so named prepared statements fail with "does not exist".
-const POOL_OPTS = { max: 5, idle_timeout: 20, connect_timeout: 10, prepare: false } as const;
+// Neon cold starts + distant regions can exceed 10s to establish TLS; dev uses a longer timeout.
+const POOL_OPTS = {
+  max: 5,
+  idle_timeout: 20,
+  connect_timeout: process.env.NODE_ENV === "development" ? 60 : 20,
+  prepare: false,
+} as const;
 
 const globalForDb = globalThis as unknown as {
   __pgClient?: Sql;
